@@ -84,7 +84,7 @@ export default function Hero() {
                 </p>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-up opacity-0-init animate-delay-300"
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-up opacity-0-init animate-delay-300"
                     style={{ animationFillMode: "forwards" }}>
                     <a
                         href="/#self-host"
@@ -110,8 +110,31 @@ export default function Hero() {
                     </a>
                 </div>
 
+                {/* Product Hunt Badge */}
+                <div className="flex justify-center mb-10 animate-fade-up opacity-0-init animate-delay-400"
+                    style={{ animationFillMode: "forwards" }}>
+                    <a href="https://www.producthunt.com/products/tengen?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-tengen" target="_blank" rel="noopener noreferrer">
+                        {/* Light Theme Badge */}
+                        <img 
+                            alt="Tengen - Own your passwords. Own your security. | Product Hunt" 
+                            width="250" 
+                            height="54" 
+                            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1098495&theme=light&t=1773525504209" 
+                            className="block dark:hidden hover:scale-105 transition-transform duration-200"
+                        />
+                        {/* Dark Theme Badge */}
+                        <img 
+                            alt="Tengen - Own your passwords. Own your security. | Product Hunt" 
+                            width="250" 
+                            height="54" 
+                            src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1098495&theme=dark&t=1773525689754" 
+                            className="hidden dark:block hover:scale-105 transition-transform duration-200"
+                        />
+                    </a>
+                </div>
+
                 {/* Social Proof */}
-                <p className="text-xs text-muted-foreground/60 animate-fade-up opacity-0-init animate-delay-400"
+                <p className="text-xs text-muted-foreground/60 animate-fade-up opacity-0-init animate-delay-500"
                     style={{ animationFillMode: "forwards" }}>
                     Open Source{" "}
                     <span className="mx-2 text-border">·</span>
