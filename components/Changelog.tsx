@@ -1,101 +1,31 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { Timeline } from "@/components/ui/timeline"
-import { CheckCircle2, Circle } from "lucide-react"
-
-const changelogData = [
-    {
-        title: "v1.0.0",
-        content: (
-            <div>
-                <div className="flex items-center gap-3 mb-4">
-                    <h4 className="text-xl font-bold text-foreground">Initial Release</h4>
-                    <span className="text-xs font-mono font-medium px-2 py-1 rounded bg-secondary text-muted-foreground border border-border/50">Coming Soon</span>
-                </div>
-                <p className="text-muted-foreground text-sm mb-6 max-w-lg leading-relaxed">
-                    First public release of Tengen. Built for personal use, open sourced for everyone.
-                </p>
-                <div className="space-y-3">
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Username + master password authentication</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>AES-256-GCM encryption at rest with Argon2id key derivation</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Full vault CRUD — add, edit, delete, view password entries</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Password generator with configurable options</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Real-time password strength meter powered by zxcvbn</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>HaveIBeenPwned breach detection — auto check on save, manual refresh anytime</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Tags, search, filtering and sorting across the vault</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Password Health dashboard — see weak, pwned, reused and old passwords at a glance</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Copy to clipboard with automatic 30 second clear</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Auto-lock vault after 15 minutes of inactivity</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Dark and light theme with toggle</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Docker Compose setup — `docker compose up` and you&apos;re done</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Security headers and Content Security Policy middleware</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" /> <span>Data persisted in SQLite — a single file on your machine, fully yours</span>
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-    {
-        title: "Pre-release",
-        content: (
-            <div>
-                <div className="flex items-center gap-3 mb-4">
-                    <h4 className="text-xl font-bold text-foreground">Development</h4>
-                    <span className="text-xs font-mono font-medium px-2 py-1 rounded bg-secondary text-muted-foreground border border-border/50">March 2026</span>
-                </div>
-                <div className="space-y-3">
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Circle className="w-4 h-4 mt-0.5 shrink-0" /> <span>Project scaffolded — FastAPI backend, React frontend, SQLite database</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Circle className="w-4 h-4 mt-0.5 shrink-0" /> <span>Encryption architecture designed — Argon2id + AES-256-GCM</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Circle className="w-4 h-4 mt-0.5 shrink-0" /> <span>Docker Compose setup working end to end</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Circle className="w-4 h-4 mt-0.5 shrink-0" /> <span>GitHub repository opened at github.com/smadabat1/tengen</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Circle className="w-4 h-4 mt-0.5 shrink-0" /> <span>Domain tengen.in acquired</span>
-                    </div>
-                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                        <Circle className="w-4 h-4 mt-0.5 shrink-0" /> <span>AGPL-3.0 license selected</span>
-                    </div>
-                </div>
-            </div>
-        ),
-    },
-]
+import { fetchRawGitHubFile } from "@/lib/github"
+import { parseChangelog, TimelineEntry } from "@/lib/parser"
 
 export default function Changelog() {
+    const [data, setData] = useState<TimelineEntry[]>([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        async function loadChangelog() {
+            try {
+                const markdown = await fetchRawGitHubFile("CHANGELOG.md")
+                const parsedData = parseChangelog(markdown)
+                setData(parsedData)
+            } catch (err) {
+                console.error("Failed to load changelog:", err)
+                setError("Failed to load the changelog from GitHub. Please try again later.")
+            } finally {
+                setLoading(false)
+            }
+        }
+        loadChangelog()
+    }, [])
+
     return (
         <section id="changelog" className="route-page-bg py-24 lg:py-32 w-full min-h-screen">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
@@ -107,7 +37,22 @@ export default function Changelog() {
                 </p>
             </div>
 
-            <Timeline data={changelogData} />
+            {loading ? (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex justify-center">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                        <p className="text-muted-foreground animate-pulse">Fetching latest updates...</p>
+                    </div>
+                </div>
+            ) : error ? (
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                    <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6 text-center">
+                        <p className="text-destructive font-medium">{error}</p>
+                    </div>
+                </div>
+            ) : (
+                <Timeline data={data} />
+            )}
         </section>
     )
 }
