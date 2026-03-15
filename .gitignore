@@ -21,6 +21,7 @@ bun-debug.log*
 
 .DS_Store
 
+*.db
 Thumbs.db
 
 *.tsbuildinfo
