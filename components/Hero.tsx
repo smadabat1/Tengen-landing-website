@@ -117,7 +117,7 @@ export default function Hero() {
                         {/* Light Theme Badge */}
                         <img 
                             alt="Tengen - Own your passwords. Own your security. | Product Hunt" 
-                            width="250" 
+                            width="150" 
                             height="54" 
                             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1098495&theme=light&t=1773525504209" 
                             className="block dark:hidden hover:scale-105 transition-transform duration-200"
@@ -125,7 +125,7 @@ export default function Hero() {
                         {/* Dark Theme Badge */}
                         <img 
                             alt="Tengen - Own your passwords. Own your security. | Product Hunt" 
-                            width="250" 
+                            width="150" 
                             height="54" 
                             src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1098495&theme=dark&t=1773525689754" 
                             className="hidden dark:block hover:scale-105 transition-transform duration-200"
