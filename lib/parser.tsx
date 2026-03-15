@@ -2,14 +2,15 @@ import React from "react";
 import { CheckCircle2, Circle } from "lucide-react";
 
 export interface TimelineEntry {
-    title: string;
+    title: React.ReactNode;
     content: React.ReactNode;
 }
 
 export function parseRoadmap(markdown: string): TimelineEntry[] {
     const sections = markdown.split(/^## /m).slice(1);
     
-    return sections.map((section) => {
+    // First pass: extract all info
+    const parsedSections = sections.map((section) => {
         const lines = section.split("\n");
         const titleLine = lines[0].trim();
         const remainingContent = lines.slice(1).join("\n");
@@ -33,7 +34,6 @@ export function parseRoadmap(markdown: string): TimelineEntry[] {
         const descriptionMatch = remainingContent.match(/^> (.*)$/m);
         const description = descriptionMatch ? descriptionMatch[1] : "";
         
-        // Extract items
         const items: { text: string; completed: boolean }[] = [];
         const itemRegex = /^- \[([ x])\] (.*)$/gm;
         let match;
@@ -45,19 +45,49 @@ export function parseRoadmap(markdown: string): TimelineEntry[] {
         }
         
         return {
-            title: timelineTitle,
+            timelineTitle,
+            mainContentHeader,
+            description,
+            items,
+            rawTitle
+        };
+    });
+
+    // Find the latest released version
+    // It's the last section that contains "(Released)" case-insensitive
+    let latestReleasedIndex = -1;
+    for (let i = parsedSections.length - 1; i >= 0; i--) {
+        if (parsedSections[i].rawTitle.toLowerCase().includes("(released)")) {
+            latestReleasedIndex = i;
+            break;
+        }
+    }
+
+    // Second pass: convert to TimelineEntry
+    return parsedSections.map((entry, index) => {
+        const isLatest = index === latestReleasedIndex;
+
+        return {
+            title: entry.timelineTitle,
             content: (
                 <div>
-                    {mainContentHeader && (
-                        <h4 className="text-xl font-bold text-foreground mb-4">{mainContentHeader}</h4>
-                    )}
-                    {description && (
+                    <div className="flex items-center gap-3 mb-4">
+                        {entry.mainContentHeader && (
+                            <h4 className="text-xl font-bold text-foreground">{entry.mainContentHeader}</h4>
+                        )}
+                        {isLatest && (
+                            <span className="text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20">
+                                Latest
+                            </span>
+                        )}
+                    </div>
+                    {entry.description && (
                          <p className="text-muted-foreground text-sm mb-6 max-w-lg leading-relaxed">
-                            {description}
+                            {entry.description}
                         </p>
                     )}
                     <div className="space-y-3">
-                        {items.map((item, idx) => (
+                        {entry.items.map((item, idx) => (
                             <div key={idx} className="flex items-start gap-2 text-sm text-foreground">
                                 {item.completed ? (
                                     <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
@@ -105,17 +135,27 @@ export function parseChangelog(markdown: string): TimelineEntry[] {
                              const trimmed = line.trim();
                              if (!trimmed) return null;
                              
+                             // Bug 1: Remove separators (lines consisting only of hyphens, underscores, or asterisks)
+                             if (/^[ \-_*]{3,}$/.test(trimmed)) return null;
+
                              if (trimmed.startsWith("###")) {
                                  return <h4 key={idx} className="text-lg font-semibold text-foreground mt-10 mb-4">{trimmed.replace("### ", "")}</h4>;
+                             }
+
+                             if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
+                                 return <h5 key={idx} className="text-base font-bold text-foreground mt-6 mb-2">{trimmed.replace(/\*\*/g, "")}</h5>;
                              }
                              
                              if (trimmed.startsWith("-")) {
                                  const text = trimmed.replace(/^- (?:\[[ x]\] )?/, "");
                                  
                                  return (
-                                     <div key={idx} className="flex items-start gap-2 text-sm text-foreground">
-                                         <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                                         <span>{text}</span>
+                                     <div key={idx} className="flex items-start gap-3 text-sm text-foreground">
+                                         {/* Bug 2: Ensure icon is truly unshrinkable */}
+                                         <div className="w-4 h-4 mt-0.5 flex-none text-primary">
+                                            <CheckCircle2 className="w-4 h-4" />
+                                         </div>
+                                         <span className="flex-1 leading-relaxed">{text}</span>
                                      </div>
                                  );
                              }

@@ -13,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 interface TimelineEntry {
-    title: string
+    title: React.ReactNode
     content: React.ReactNode
 }
 
