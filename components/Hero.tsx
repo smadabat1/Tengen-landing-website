@@ -69,7 +69,7 @@ export default function Hero() {
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6 animate-fade-up opacity-0-init animate-delay-100"
                     style={{ animationFillMode: "forwards" }}>
                     <span className="block dark:gradient-text gradient-text-light text-foreground">
-                        Your passwords live here.
+                        Your vault lives here.
                     </span>
                     <span className="block text-muted-foreground font-normal mt-2 text-4xl sm:text-5xl lg:text-6xl">
                         Not on someone else&apos;s server.
@@ -79,7 +79,7 @@ export default function Hero() {
                 {/* Subheading */}
                 <p className="max-w-2xl mx-auto text-lg sm:text-xl text-muted-foreground leading-relaxed mb-10 animate-fade-up opacity-0-init animate-delay-200"
                     style={{ animationFillMode: "forwards" }}>
-                    Tengen is a self-hostable password manager. Encrypted at rest, runs on your machine,
+                    Tengen is a self-hosted private vault for passwords and encrypted notes. Encrypted at rest, runs on your machine,
                     never leaves your network. Open source, always.
                 </p>
 

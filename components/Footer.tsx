@@ -22,7 +22,7 @@ export default function Footer() {
                             <span className="font-bold tracking-tight">Tengen</span>
                         </a>
                         <p className="text-xs text-muted-foreground leading-relaxed max-w-[200px]">
-                            Your passwords, your machine. No clouds, no servers, no funny business.
+                            Your vault, your machine. No clouds, no servers, no funny business.
                         </p>
                     </div>
 

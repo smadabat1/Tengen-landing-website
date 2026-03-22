@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Lock, Home, Key, Shield, AlertTriangle, Tag, Moon, Box, Unlock } from "lucide-react"
+import { Lock, Home, Key, Shield, AlertTriangle, Tag, Moon, Box, Unlock, NotebookPen } from "lucide-react"
 
 const features = [
     {
@@ -18,8 +18,14 @@ const features = [
     },
     {
         icon: <Key className="w-8 h-8 text-primary" />,
-        title: "Password Generator",
-        description: "Generate strong, customisable passwords instantly.",
+        title: "Password Manager",
+        description: "Create, update, delete password entries. Generator, breach detection, health analysis — all included.",
+        size: "small",
+    },
+    {
+        icon: <NotebookPen className="w-8 h-8 text-primary" />,
+        title: "Private Notes",
+        description: "Encrypted notes with folders, tags, and per-note PIN/password lock. Your thoughts, only yours.",
         size: "small",
     },
     {
@@ -56,7 +62,7 @@ const features = [
         icon: <Unlock className="w-8 h-8 text-primary" />,
         title: "Open Source",
         description: "Fully auditable. No black boxes. Trust the code, not the promise.",
-        size: "large",
+        size: "small",
     },
 ]
 

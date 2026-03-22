@@ -21,7 +21,7 @@ const steps = [
         number: "03",
         title: "Use It",
         description:
-            "Add passwords, generate new ones, check for breaches. Your data stays yours.",
+            "Add passwords, write private notes, generate new ones, check for breaches. Your vault stays yours.",
         code: "# Your vault. Your machine.",
     },
 ]

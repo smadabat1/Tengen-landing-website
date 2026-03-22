@@ -35,7 +35,7 @@ export default function OpenSource() {
                         <p className="text-muted-foreground/60 text-sm mb-10">
                             Join{" "}
                             <span className="text-foreground font-medium">{starsLabel} developers</span> who trust
-                            Tengen with their passwords.
+                            Tengen with their vault.
                         </p>
                     )}
                     {!starsLabel && <div className="mb-10" />}
